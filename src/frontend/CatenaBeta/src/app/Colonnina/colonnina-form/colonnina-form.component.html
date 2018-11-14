@@ -1,0 +1,107 @@
+<div class="col-md-12">
+  <h1>Inserimento nuova colonnina di rilevamento</h1>
+  <h2>Utente loggato:<b><span ng-model="utente"></span></b></h2>
+  <form>
+      <input type="hidden" id="_id"/>
+      <div class="form-group">
+        <label for="id">ID colonnina</label>
+        <input type="text" class="form-control" id="id" required [(ngModel)]="model.id" name="id">
+      </div>
+
+    <div class="form-group">
+      <label for="idSede">Sede</label>
+      <select class="form-control" id="idSede" required [(ngModel)]="model.idSede" name="idSede"
+      (change)="ComandiDropDownChanged($event.target.value)">
+        <option *ngFor="let comando of comandi" [value]="comando.codCMD">{{comando.comando}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dataInserimento">dataInserimento</label>
+      <input type="date"  class="form-control" id="dataInserimento" required [(ngModel)]="model.dataInserimento" name="dataInserimento">
+    </div>
+
+    <input type="hidden" id="usernameOperatore" ng-model="utente"/>
+
+    <div class="form-group">
+      <label for="regione">Regione</label>
+      <select class="form-control" id="regione" required [(ngModel)]="model.regione" name="regione"
+      (change)="RegioneDropDownChanged($event.target.value)">
+        <option *ngFor="let reg of regioni" [value]="reg.codRegione">{{reg.regione}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="provincia">Provincia</label>
+      <select class="form-control" id="provincia" required [(ngModel)]="model.provincia" name="provincia"
+      (change)="ProvinciaDropDownChanged($event.target.value)">
+        <option *ngFor="let prov of province" [value]="prov.codProvincia">{{prov.provincia}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+        <label for="effSistema">Stato Efficienza</label>
+        <select class="form-control" id="effSistema" required [(ngModel)]="model.effSistema" name="effSistema"
+                (change)="effSistemaDropDownChanged($event.target.value)">
+        <option *ngFor="let se of statiEfficienza" [value]="se.id">{{se.id}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="causaInefficienza">Descrizione Inefficienza</label>
+      <input type="text"  class="form-control" id="causaInefficienza" [disabled]='disabilitaCausa()' [(ngModel)]="model.causaInefficienza" name="causaInefficienza">
+    </div>
+    <div class="form-group">
+        <label for="tipologia">Tipologia</label>
+        <input type="text"  class="form-control" id="tipologia" [(ngModel)]="model.tipologia" name="tipologia">
+     </div>
+     <div class="form-group">
+        <label for="luogo">luogo</label>
+        <input type="text"  class="form-control" id="luogo" [(ngModel)]="model.luogo" name="luogo">
+     </div>
+     <div class="form-group">
+        <label for="sistema">sistema</label>
+        <input type="text"  class="form-control" id="sistema" [(ngModel)]="model.sistema" name="sistema">
+     </div>
+     
+     <div class="form-group">
+        <label for="utmFuso">utmFuso</label>
+        <input type="text"  class="form-control" id="utmFuso" [(ngModel)]="model.utmFuso" name="utmFuso">
+     </div>
+     <div class="form-group">
+        <label for="utmEst">utmEst</label>
+        <input type="number"  class="form-control" id="utmEst" [(ngModel)]="model.utmEst" name="utmEst"
+        (change)="onUTMChange($event.target)">
+     </div>
+     <div class="form-group">
+        <label for="utmNord">utmNord</label>
+        <input type="number"  class="form-control" id="utmNord" [(ngModel)]="model.utmNord" name="utmNord"
+        (change)="onUTMChange($event.target)">
+     </div>
+
+     <div class="form-group">
+        <label for="greenEGradi">greenEGradi</label>
+        <input type="number"  class="form-control" id="greenEGradi" [(ngModel)]="model.greenEGradi" name="greenEGradi">
+     </div>
+     <div class="form-group">
+        <label for="greenEPrimi">greenEPrimi</label>
+        <input type="number"  class="form-control" id="greenEPrimi" [(ngModel)]="model.greenEPrimi" name="greenEPrimi">
+     </div>
+     <div class="form-group">
+        <label for="greenESecondi">greenESecondi</label>
+        <input type="number"  class="form-control" id="greenESecondi" [(ngModel)]="model.greenESecondi" name="greenESecondi">
+     </div>
+
+     <div class="form-group">
+        <label for="greenNGradi">greenNGradi</label>
+        <input type="number"  class="form-control" id="greenNGradi" [(ngModel)]="model.greenNGradi" name="greenNGradi">
+     </div>
+     <div class="form-group">
+        <label for="greenNPrimi">greenNPrimi</label>
+        <input type="number"  class="form-control" id="greenNPrimi" [(ngModel)]="model.greenNPrimi" name="greenNPrimi">
+     </div>
+     <div class="form-group">
+        <label for="greenNSecondi">greenNSecondi</label>
+        <input type="number"  class="form-control" id="greenNSecondi" [(ngModel)]="model.greenNSecondi" name="greenNSecondi">
+     </div>
+     <app-colonnina-letture class="text-primary"></app-colonnina-letture>
+     <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
