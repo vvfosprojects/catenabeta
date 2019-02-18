@@ -2,14 +2,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import {CoordinatesService, TransformationType, Direction} from 'angular-coordinates';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 import { ColonninaComponent } from '../colonnina/colonnina.component';
 import { CatenabetaApiService } from '../../core/catenabeta-api.service';
 import { AnagTerritorioService } from  '../../core/anag-territorio.service';
 import { LocalDataService } from  '../../core/local-data.service';
+import {CustomerService} from '../../core/customer.service';
 
-import { IColonnina, IRegione,IProvincia,IComando,IComune, IStatoEfficienza  } from 'src/app/shared/interfaces';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { IColonnina, IRegione,IProvincia,IComando,IComune, IStatoEfficienza } from 'src/app/shared/interfaces';
+import {Persona} from '../../model/Persona.component';
 
 @Component({
   selector: 'app-colonnina-form',
@@ -22,7 +24,7 @@ export class ColonninaFormComponent implements OnInit {
   public province: Array<IProvincia> = null;
   public comuni: Array<IComune> = null;
   public comandi: Array<IComando> = null;
-  public utente: string="giuseppe.rirrama";
+  public utente: Persona;
   public statiEfficienza: Array<IStatoEfficienza>=null;
 
   private direction:  Direction;
@@ -39,7 +41,14 @@ export class ColonninaFormComponent implements OnInit {
     , private ats: AnagTerritorioService
     , private ld: LocalDataService
     , private cs: CoordinatesService
+    , private customerService: CustomerService
     ) {
+      console.log(customerService.isLogged());
+      if (customerService.isLogged())
+      {
+          this.utente= customerService.getLoggedUser();
+          console.log(this.utente);
+      }
      }
 
   ngOnInit() {

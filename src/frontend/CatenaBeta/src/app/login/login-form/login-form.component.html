@@ -1,0 +1,23 @@
+<div class="flex-left">
+  <div class="form-group col-5 row">
+    <label class="col-4 col-form-label" for="userName">Nome Utente</label>
+    <div class="col-8">
+      <input type="text" class="form-control" id="userName" placeholder="Nome Utente" [(ngModel)]="userName">
+    </div>
+  </div>
+  <div class="form-group col-5 row">
+    <label class="col-4 col-form-label" for="userName">Password</label>
+    <div class="col-8">
+      <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
+    </div>
+  </div>
+
+  <div class="form-group col-5 row">
+    <div class="offset-4 col-8">
+      <button type="submit" class="btn btn-primary" style="border-radius: 10%;" (click)="tryLogin()">Entra</button> </div>
+  </div>
+</div>
+<div class="flex-right">
+    <div class="offset-8 col-2">
+      <button type="submit" class="btn btn-primary" style="border-radius: 10%;">Visualizza<br>la procedura</button> </div>
+  </div>

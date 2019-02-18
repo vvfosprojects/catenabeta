@@ -1,3 +1,269 @@
-<p>
-  colonnina-letture-form works!
-</p>
+<div class="row col-md-12">
+    <div class="bg-primary text-white text-center col-md-6">
+        <h6>{{subTitle}}</h6>
+    </div>
+    <div class="text-white text-center col-md-6">
+        <h6 class="align-items-center" style="background-color:#ffc266; color:black; ">{{utente.Nome}} {{utente.Cognome}}
+            {{utente.DescrizioneUO}}</h6>
+    </div>
+</div>
+<div class="col-md-6">
+    <ngb-tabset #t="ngbTabset">
+        <ngb-tab id="configTab" title="">
+            <ng-template ngbTabTitle><i class="fa fa-4x fa-home"></i></ng-template>
+            <ng-template ngbTabContent>
+                <span class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="background-color:#ffd1b3;">Nome</div>
+                    <div class="col-md-4" style="background-color:#ffd1b3;">Cognome</div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Operatore che ha effettuato il <br>campionamento e la misurazione</div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="Nome" name="Nome" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="Cognome" name="Cognome" required>
+                    </div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Data di campionamento e <br>misurazione</div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="DataCampionamento" name="DataCampionamento"
+                            required>
+                    </div>
+                    <div class="col-md-4"></div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Data Inserimento</div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="dataInserimento" name="dataInserimento" required>
+                    </div>
+                    <div class="col-md-4"></div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Progressivo misura</div>
+                    <div class="col-md-4">
+                        <select>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4"></div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Tipologia Misura</div>
+                    <div class="col-md-8">
+                        <div class="custom-radios">
+                            <div class="col-md-12">
+                                <input type="radio" id="TipologiaMisuraSettimanale" name="TipologiaMisura" value="Settimanale"
+                                    checked>
+                                <label>
+                                    <span>Monitoraggio Settimanale
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-md-12">
+                                <input class="col-md-2" type="radio" id="TipologiaMisuraIntervento" name="TipologiaMisura"
+                                    value="Intervento">
+                                <label class="col-md-10">
+                                    <span>Monitoraggio Intervento
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="strumTab">
+            <ng-template ngbTabTitle><i class="fa fa-4x fa-cogs"></i></ng-template>
+            <ng-template ngbTabContent>
+                <span class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="background-color:#ffd1b3;">Modello</div>
+                    <div class="col-md-4" style="background-color:#ffd1b3;">Matricola</div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Strumentazione <br>campionamento</div>
+                    <div class="col-md-4">
+                        <select id="StrumCampionamentoModello" name="StrumCampionamentoModello">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="StrumCampionamentoMatricola" name="StrumCampionamentoMatricola"
+                            required>
+                    </div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Strumentazione <br>misura</div>
+                    <div class="col-md-4">
+                        <select id="StrumMisuraModello" name="StrumMisuraModello">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="StrumMisuraMatricola" name="StrumMisuraMatricola"
+                            required>
+                    </div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">La catena di misura è <br> efficiente?</div>
+                    <div class="col-md-8">
+                        <div class="custom-radios">
+                            <div class="col-md-12">
+                                <input type="radio" id="CatenaEfficienteSi" name="CatenaEfficiente" value="true"
+                                    checked>
+                                <label>
+                                    <span>Si
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-md-12">
+                                <input class="col-md-2" type="radio" id="CatenaEfficienteNo" name="CatenaEfficiente"
+                                    value="false">
+                                <label class="col-md-10">
+                                    <span>No
+                                    </span>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">Strumentazione <br>misura</div>
+                                        <div class="col-md-8">
+                                            <select id="CausaInefficienza" name="CausaInefficienza">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="LuogoDataVolTab">
+            <ng-template ngbTabTitle><i class="fa fa-4x fa-map-marker"></i></ng-template>
+            <ng-template ngbTabContent>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Ora inizio</div>
+                    <div class="col-md-4">
+                        <input type="time" class="form-control" id="OraInizio" name="OraInizio" required>
+                    </div>
+                    <div class="col-md-4"></div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Volume aria aspirato</div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" id="VolumeAriaAspirato" name="VolumeAriaAspirato"
+                            required>
+                    </div>
+                    <div class="col-md-4">metri cubi</div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Condizioni meteo</div>
+                    <div class="col-md-4">
+                        <select class="form-control" id="CondizioneMeteo" name="CondizioneMeteo">
+                            <option value="sereno">sereno</option>
+                            <option value="nuvoloso">nuvoloso</option>
+                            <option value="nebbia">nebbia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4"></div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Luogo della misurazione</div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="LuogoMisurazione" name="LuogoMisurazione" required>
+                    </div>
+                </span>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="col-md-4">Coordinate<br>(map datum WGS84)<br>ricavabili da un GPS</div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="col-md-12">Latitudine Nord</div>
+                                <div class="col-md-12">
+                                    <div class="col-md-4">Gradi</div>
+                                    <div class="col-md-4">Primi</div>
+                                    <div class="col-md-4">Secondi</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-4"><input type="number" id="LatGradi" name="LatGradi"></div>
+                                    <div class="col-md-4"><input type="number" id="LatPrimi" name="LatPrimi"></div>
+                                    <div class="col-md-4"><input type="number" id="LatSecondi" name="LatSecondi"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <div class="col-md-12">Longitudine Est</div>
+                                <div class="col-md-12">
+                                    <div class="col-md-4">Gradi</div>
+                                    <div class="col-md-4">Primi</div>
+                                    <div class="col-md-4">Secondi</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div><input class="col-md-4" type="number" id="LonGradi" name="LonGradi"></div>
+                                    <div><input class="col-md-4" type="number" id="LonPrimi" name="LonPrimi"></div>
+                                    <div><input class="col-md-4" type="number" id="LonSecondi" name="LonSecondi"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+                </span>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="FiltroBiancoNeroTab">
+            <ng-template ngbTabTitle><i class="fa fa-4x fa-filter"></i></ng-template>
+            <ng-template ngbTabContent>
+                <span class="row align-items-center" style="vertical-align: 50%;">
+                    <div class="card col-md-12">
+                        <div class="card-header border-0">
+                            <h5 class="card-title" style="color:red;">FILTRO BIANCO</h5>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-text">
+                                <span class="col-md-3">titolo</span>
+                                <span class="col-md-3">valore</span>
+                                <span class="col-md-6">descrizione</span>
+                                <span class="col-md-3">titolo2</span>
+                                <span class="col-md-3">valore2</span>
+                                <span class="col-md-6">descrizione2</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card col-md-12">
+                        <div class="card-header border-0">
+                            <h5 class="card-title" style="color:red;">FILTRO NERO</h5>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-text">
+                                <span class="col-md-3">titolo</span>
+                                <span class="col-md-3">valore</span>
+                                <span class="col-md-6">descrizione</span>
+                            </span>
+                        </div>
+                    </div>
+                </span>
+                <span class="row align-items-center col-md-12" style="vertical-align: 50%;">
+                    <div class="col-md-2 text-right">Note</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" style="height: 100px;" id="Note" name="Note" required>
+                    </div>
+                </span>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

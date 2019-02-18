@@ -80,3 +80,16 @@ export interface IStatoEfficienza{
     id:                 String;
     descrizione:        String;
 }
+
+export interface IPersona{
+         Codice: string;
+         UserName: string;
+         NomeQualifica: string;
+         Nome: string;
+         Cognome: string;
+         CodiceFiscale: string;
+         CodiceTurno: string;
+         CodiceUO: string;
+         CodiceDominio: string;
+         DescrizioneUO: string;
+}
