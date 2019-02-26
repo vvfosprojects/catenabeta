@@ -86,7 +86,7 @@ export class ColonninaFormComponent implements OnInit {
     // });
   }
 
-  effSistemaDropDownChanged(val: any) {
+ /*  effSistemaDropDownChanged(val: any) {
     console.log(val);
     if(val!="Efficiente"){
       this.model.causaInefficienza="";
@@ -132,5 +132,5 @@ export class ColonninaFormComponent implements OnInit {
       default:
           console.log('oggetto non riconosciuto');
     }
-  }
+  } */
 }

@@ -1,0 +1,15 @@
+<div class="col-md-12">
+  <span class="row col-md-12">{{ title }}</span>
+  <span class="row col-md-12 hidden">
+      <span class="col-md-5">notazione UTM</span>
+      <span class="col-md-7"><input type="decimal" id="{{id}}.UTM" name="{{name}}.UTM" [(ngModel)]="UTM" (ngModelChange)="AggiornaCoordinateDaUTMOnChange($event)" ngModel></span>
+  </span>
+  <span class="row col-md-12">
+    <span class="col-md-3">Gradi</span>
+    <span class="col-md-9"><input type="number" id="{{id}}.Gradi" name="{{name}}.Gradi" [(ngModel)]="Gradi"   (ngModelChange)="AggiornaCoordinateDaGMSOnChange($event)" ngModel></span>
+    <span class="col-md-3">Primi</span>
+    <span class="col-md-9"><input type="number" id="{{id}}.Primi" name="{{name}}.Primi" [(ngModel)]="Primi"  (ngModelChange)="AggiornaCoordinateDaGMSOnChange($event)" ngModel></span>
+    <span class="col-md-3">Secondi</span>
+    <span class="col-md-9"><input type="number" id="{{id}}.Secondi" name="{{name}}.Secondi" [(ngModel)]="Secondi"  (ngModelChange)="AggiornaCoordinateDaGMSOnChange($event)" ngModel></span>
+  </span>
+</div>

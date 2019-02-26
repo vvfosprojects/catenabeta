@@ -18,6 +18,10 @@ import { ColonninaLettureFormModule } from './ColonninaLetture/colonnina-letture
 import { LoginFormModule } from './login/login-form/login-form.module';
 import { NeedAuthGuard } from './auth.guard/auth.guard.component';
 import { MainMenuModule } from './main-menu/main-menu.module';
+import { GeoCoordinateFormComponent } from './geo-coordinate/form/geo-coordinate-form.component';
+import { GeoCoordinateViewComponent } from './geo-coordinate/view/geo-coordinate-view.component';
+import {CoordinatesModule} from 'angular-coordinates';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +30,8 @@ import { MainMenuModule } from './main-menu/main-menu.module';
     ColonninaFormComponent,
     ColonninaLettureComponent,
     ColonninaLettureFormComponent,
+    GeoCoordinateFormComponent,
+    GeoCoordinateViewComponent,
 
   ],
   imports: [
@@ -40,10 +46,13 @@ import { MainMenuModule } from './main-menu/main-menu.module';
     LoginFormModule,
     MainMenuModule,
     ArchwizardModule,
-    ColonninaLettureFormModule
+    ColonninaLettureFormModule,
+    CoordinatesModule
   ],
   providers: [
     NeedAuthGuard
+    ,ColonninaComponent
+    , ColonninaLettureComponent
   ],
   bootstrap: [AppComponent]
 })

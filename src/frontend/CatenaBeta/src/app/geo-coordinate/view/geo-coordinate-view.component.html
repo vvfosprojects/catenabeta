@@ -1,0 +1,8 @@
+<div class="col-md-12">
+  <span class="col-md-12">{{ title }}</span>
+  <span class="col-md-12" *ngIf="utmVisible=='true'">
+    {{utm}}</span>
+  <span class="col-md-12" *ngIf="gmsVisible=='true'">
+    {{gms}}</span>
+  <span class="text-danger" *ngIf="errorMessage">{{errorMessage}}</span>
+</div>
