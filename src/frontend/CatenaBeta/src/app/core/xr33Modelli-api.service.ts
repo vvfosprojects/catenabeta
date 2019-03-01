@@ -13,7 +13,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 export class Xr33ModelliApiService {
   xr33ModelliAll: Observable<IXr33Modelli[]>;
-  private BaseURLXr33Modelli: string ="https://localhost:5001/api/Xr33ModelliApi";  
+  private BaseURLXr33Modelli: string ="https://localhost:5001/api/";  
   constructor(private  httpClient:  HttpClient) {}
   
   private setHeaders(): HttpHeaders {
@@ -34,15 +34,22 @@ export class Xr33ModelliApiService {
     return body || { };
   }
 
-  getAllXr33Modelli(): Observable<IXr33Modelli[]>{
-    console.log("*******************getAllXr33Modelli*******************************");
-    return this.httpClient.get<IXr33Modelli[]>(this.BaseURLXr33Modelli
+  getAllXr33ModelliCampionamento(): Observable<IXr33Modelli[]>{
+    return this.httpClient.get<IXr33Modelli[]>(this.BaseURLXr33Modelli+"Xr33ModelliCampionamentoApi"
     , { headers: this.setHeaders()
         //, params: httpParams
       }
     ) ;
-
   };
+
+  getAllXr33ModelliMisurazione(): Observable<IXr33Modelli[]>{
+    return this.httpClient.get<IXr33Modelli[]>(this.BaseURLXr33Modelli+"Xr33ModelliMisurazioneApi"
+    , { headers: this.setHeaders()
+        //, params: httpParams
+      }
+    ) ;
+  };
+
   
 }
 

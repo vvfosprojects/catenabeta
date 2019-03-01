@@ -1,5 +1,6 @@
 import { Persona } from "../model/Persona.component";
-import {geoJson}  from 'leaflet';
+import { coordinate } from 'geocoordinate';
+import { Point, GeoJsonObject}  from 'geojson';
 
 
 export interface IColonninaLetture {
@@ -42,7 +43,7 @@ export interface ILettura {
     volumeAriaAspirato: number;
     condizioniMeteo: String;
     luogoMisurazione: String;
-    geoCoordinate: geoJson;
+    geoCoordinate: Point;
     letturaFiltroBianco: Number;
     letturaFiltroBianco2ore: Number;
     letturaFiltroNero: Number;

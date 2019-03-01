@@ -3,7 +3,7 @@ import { IColonnina, ILettura, IPersona, IGeoCoordinata } from 'src/app/shared/i
 import { Persona } from 'src/app/model/Persona.component';
 import { GeoCoordinata } from 'src/app/model/GeoCoordinata.component';
 import { CatenabetaApiService } from '../../core/catenabeta-api.service';
-import {geoJson}  from 'leaflet';
+import { Point, GeoJsonObject}  from 'geojson';
 
 @Component({
   selector: 'app-colonnina-letture',
@@ -32,7 +32,7 @@ export class ColonninaLettureComponent implements OnInit, ILettura {
   volumeAriaAspirato: number;
   condizioniMeteo: String;
   luogoMisurazione: String;
-  geoCoordinate: geoJson;
+  geoCoordinate: Point;
   letturaFiltroBianco: Number;
   letturaFiltroBianco2ore: Number;
   letturaFiltroNero: Number;
@@ -41,8 +41,7 @@ export class ColonninaLettureComponent implements OnInit, ILettura {
   public Xr33LettureAll: Array<ILettura> = null;
 
 
-  constructor(private catenabetaApiService: CatenabetaApiService) {
-   
+  constructor(private catenabetaApiService: CatenabetaApiService) {   
   }
 
   ngOnInit() {

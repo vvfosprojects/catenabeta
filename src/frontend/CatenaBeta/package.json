@@ -22,6 +22,8 @@
     "@angular/router": "^7.2.6",
     "@ng-bootstrap/ng-bootstrap": "^4.0.4",
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
+    "@types/jspdf": "^1.2.2",
+    "@types/leaflet": "^1.4.3",
     "angular-archwizard": "^3.0.0",
     "angular-cas-auth-api": "^0.1.4",
     "angular-coordinates": "^1.0.0",

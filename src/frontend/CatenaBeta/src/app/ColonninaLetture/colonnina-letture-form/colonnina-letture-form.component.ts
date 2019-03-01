@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Time } from '@angular/common';
+import { Geometry,Point } from 'geojson';
+
 import { Persona } from '../../model/Persona.component';
 import { GeoCoordinata } from '../../model/GeoCoordinata.component';
 import { CustomerService } from '../../core/customer.service';
@@ -7,8 +10,8 @@ import { Xr33ModelliApiService } from 'src/app/core/xr33Modelli-api.service';
 import { IXr33Modelli, IColonnina, ILettura, IGeoCoordinata } from 'src/app/shared/interfaces';
 import { CatenabetaApiService } from 'src/app/core/catenabeta-api.service';
 import { ColonninaComponent } from 'src/app/Colonnina/colonnina/colonnina.component';
-import { geoJson } from 'leaflet';
 import { inspect } from 'util';
+import * as jsPDF from 'jspdf'
 
 @Component({
   selector: 'app-colonnina-letture-form',
@@ -22,9 +25,11 @@ export class ColonninaLettureFormComponent implements OnInit {
   public xr33Item: IColonnina;
   public xr33Lettura: ILettura;
   public tipologiaMonitoraggio: String;
+  public oraInizio: Time;
 
-  public xr33Modelli: Array<IXr33Modelli> = null;
-  public progressivoMisura;
+  public xr33ModelliCampionamento: Array<IXr33Modelli> = null;
+  public xr33ModelliMisurazione: Array<IXr33Modelli> = null;
+
   public ShowHideElement: string = "hidden";
   subTitle = 'Inserimento dei dati di una nuova misurazione';
   public statiMeteo: string[] = [
@@ -71,27 +76,35 @@ export class ColonninaLettureFormComponent implements OnInit {
   ) {
     if (customerService.isLogged()) {
       this.utente = customerService.getLoggedUser();
-      this.progressivoMisura = 1;
-      this.latitudineNord= new GeoCoordinata();
-      this.longitudineEst= new GeoCoordinata();
+
+      this.latitudineNord = new GeoCoordinata();
+      this.longitudineEst = new GeoCoordinata();
       console.log(this.utente);
     }
   }
 
   ngOnInit() {
-    this.xr33ModelliApiService.getAllXr33Modelli().subscribe((data: IXr33Modelli[]) => {
-      this.xr33Modelli = data;
+    this.xr33ModelliApiService.getAllXr33ModelliCampionamento().subscribe((data: IXr33Modelli[]) => {
+      this.xr33ModelliCampionamento = data;
     });
+
+    this.xr33ModelliApiService.getAllXr33ModelliMisurazione().subscribe((data: IXr33Modelli[]) => {
+      this.xr33ModelliMisurazione = data;
+    });
+
     this.catenabetaApiService.getAllXr33().subscribe((data: IColonnina[]) => {
       this.xr33All = data;
     });
     this.xr33Item = {} as IColonnina;
     this.xr33Lettura = {} as ILettura;
-    this.xr33Lettura.geoCoordinate = new geoJson();
+
+    this.xr33Lettura.progressivoMisura = 1;
+    this.xr33Lettura.geoCoordinate = { type: "Point", coordinates: [0, 0] };
     if (this.xr33Item.rilevamenti == null)
       this.xr33Item.rilevamenti = new Array<ILettura>();
 
     this.checkComplete();
+
   }
 
   faker() {
@@ -153,13 +166,7 @@ export class ColonninaLettureFormComponent implements OnInit {
         break;
     }
 
-    this.xr33Lettura.geoCoordinate = geoJson(
-      {
-        type: "Point",
-        coordinates: [this.longitudineEst.UTM, this.latitudineNord.UTM],
-      }
-
-    )
+    this.xr33Lettura.geoCoordinate = { type: "Point", coordinates: [this.longitudineEst.UTM, this.latitudineNord.UTM] };
 
     console.log("posizione");
     console.log(this.xr33Lettura.geoCoordinate);
@@ -194,6 +201,7 @@ export class ColonninaLettureFormComponent implements OnInit {
     let checked = JSON.parse(event);   //returns true
     if (checked) {
       this.ShowHideElement = 'hidden';
+      this.xr33Lettura.CatenaMisuraCausaInefficienza="";
     } else {
       this.ShowHideElement = 'visible';
     }
@@ -271,23 +279,44 @@ export class ColonninaLettureFormComponent implements OnInit {
   onSubmit() {
 
     if (!this.submitted) {
-      this.xr33Lettura.geoCoordinate =
-        geoJson({ type: "Point", coordinates: [this.longitudineEst.UTM, this.latitudineNord.UTM] });
+      this.xr33Lettura.geoCoordinate.coordinates=[this.longitudineEst.UTM, this.latitudineNord.UTM];
+      this.xr33Lettura.geoCoordinate.type="Point";
+      this.xr33Lettura.geoCoordinate.bbox=null;
+
+      this.xr33Lettura.utente = this.utente.UserName;
+      this.xr33Lettura.dataCampionamento=new Date (this.xr33Lettura.dataCampionamento+" "+this.oraInizio);
+      switch (this.tipologiaMonitoraggio) {
+        case "Intervento":
+          this.xr33Lettura.monitoraggioIntervento = true;
+          this.xr33Lettura.monitoraggioSettimanale = false;
+          break;
+        case "Settimanale":
+          this.xr33Lettura.monitoraggioIntervento = false;
+          this.xr33Lettura.monitoraggioSettimanale = true;
+          break;
+        default:
+          this.xr33Lettura.monitoraggioIntervento = false;
+          this.xr33Lettura.monitoraggioSettimanale = false;
+      }
 
       this.xr33Item.rilevamenti.push(this.xr33Lettura);
+      console.log(JSON.stringify(this.xr33Lettura));
 
-       this.catenabetaApiService.saveXr33(this.xr33Item).subscribe(
-        res => { 
-         console.log( inspect(res));
-        } 
-        ,err=>{
-          console.log("status code--->"+inspect(err))
+
+      this.catenabetaApiService.saveXr33(this.xr33Item).subscribe(
+        res => {
+          console.log(inspect(res));
         }
-       );
+        , err => {
+          console.log("status code--->" + inspect(err))
+        }
+      );
       console.log("submit");
     }
     this.submitted = true;
+    this.submitEnabled = false;
   }
+
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.xr33Lettura); }
 }
